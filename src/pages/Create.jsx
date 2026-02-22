@@ -45,7 +45,6 @@ const Create = () => {
   onSubmit={handleSubmit(submitHandler)}
 >
         <input className='block outline-0 p-2 text-lg border-b-2 w-sm border-white text-white' {...register('title')} type="text" placeholder='Recipe Title'/>
-        <small className='text-red-500'>This is how the error will be shown</small>
 
         <input className='block outline-0 mt-3 p-2 text-lg w-sm border-b-2 border-white text-white' {...register('image')} type="url" placeholder='Enter cover Image Url'/>
 
