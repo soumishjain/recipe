@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+.scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: transparent;   /* remove background */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(26, 26, 34); /* your color */
+  border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-button {
+  display: none;  /* removes top & bottom arrows */
+}
