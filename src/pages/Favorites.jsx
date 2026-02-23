@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { recipeContext } from '../context/Context'
 import { Link } from 'react-router'
 import { Heart, HeartIcon } from 'lucide-react'
+import favimg from "../assets/fav.png"
 
 const Favorites = () => {
 
@@ -59,7 +60,7 @@ const Favorites = () => {
   ) : (
     <div className='relative'>
       <h1 className='text-6xl absolute top-20 left-70 font-bold text-white/50'>Add Something to Favorites</h1>
-      <img className='h-70 w-70 top-50 left-130 absolute' src="fav.png"alt="" />
+      <img className='h-70 w-70 top-50 left-130 absolute' src={favimg} alt="" />
     </div>
   )
 }
