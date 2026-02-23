@@ -10,7 +10,7 @@ const Navbar = () => {
       <NavLink className={({isActive}) => isActive ? "text-red-500" : "text-white"} to='/recipe'>
         My Recipes
       </NavLink>
-      <NavLink className={({isActive}) => isActive ? "text-red-500" : "text-white"} to='/about'>
+      <NavLink className={({isActive}) => isActive ? "text-red-500" : "text-white"} to='/favorite'>
         Favorite
       </NavLink>
       <NavLink className={({isActive}) => isActive ? "text-red-500" : "text-white"} to='/create-recipe'>

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 const RecipeDetail = () => {
 
-    const {data , setData} = useContext(recipeContext)
+    const {data , setData , favorites , setFavorites} = useContext(recipeContext)
     const {id} = useParams()
     const navigate = useNavigate()
 
@@ -26,6 +26,27 @@ const RecipeDetail = () => {
         }
     },[data,id])
 
+    const isFavorite = () => {
+        return favorites.some(rec => rec.id === recipe.id) 
+    }
+
+
+    const favoriteHandler = (e) => {
+        e.preventDefault()
+
+        if(isFavorite()) {
+            const filtered = favorites.filter(rec => rec.id !== recipe.id)
+            setFavorites(filtered)
+            toast.success("Favorite Removed Successfully")
+        }     
+        else{
+            const newList = [...favorites , recipe]
+            setFavorites(newList)
+            toast.success("Favorite Added Successfully")
+        }  
+
+    }
+
 
     if(!recipe) return <h1 className='text-white'>Loading...</h1>
 
@@ -44,9 +65,12 @@ const RecipeDetail = () => {
      <div className='flex gap-10 flex-col'>
         <div className='relative'>
             <h1 className='text-8xl flex gap-2 items-end text-white/70 font-bold'>{recipe.title}<p className='text-white/50 text-xl'>({recipe.chef})</p></h1>
-            <div className='absolute right-0 top-0 flex gap-3'>
-             <button onClick={deleteHandler} className='px-7 py-2 hover:bg-red-600/80 duration-200 transition-all bg-red-600 font-semibold text-white rounded-lg'>Delete</button>
+            <div className='absolute right-0 top-0 flex flex-col gap-2'>
+             <div className='flex gap-3'>
+                <button onClick={deleteHandler} className='px-7 py-2 hover:bg-red-600/80 duration-200 transition-all bg-red-600 font-semibold text-white rounded-lg'>Delete</button>
          <Link to={`/update-recipe/${id}`} className='px-7 py-2 hover:bg-blue-600/80 duration-200 transition-all bg-blue-600 font-semibold text-white rounded-lg'>Update</Link>
+             </div>
+             {isFavorite() ? <button onClick={favoriteHandler} className='px-7 py-2 hover:bg-orange-600/80 duration-200 transition-all cursor-pointer bg-orange-600 font-semibold text-white rounded-lg'>Remove From Favorites</button> : <button onClick={favoriteHandler} className='px-7 py-2 hover:bg-green-600/80 duration-200 transition-all bg-green-600 font-semibold text-white rounded-lg'>Add To Favorites</button>}
         </div>
         </div>
         

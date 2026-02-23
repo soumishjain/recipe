@@ -1,10 +1,13 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import { recipeContext } from '../context/Context'
 
 const CateRecipeDetail = () => {
 
     const [data,setData] = useState(null)
+
+    const {favorites,setFavorites} = useContext(recipeContext)
 
     const {id} = useParams()
 
@@ -38,6 +41,29 @@ const CateRecipeDetail = () => {
     },[id])
 
 
+    const isFavorite = () => {
+            return favorites.some(rec => rec.idMeal === data.idMeal) 
+        }
+    
+    
+        const favoriteHandler = (e) => {
+            e.preventDefault()
+    
+            if(isFavorite()) {
+                const filtered = favorites.filter(rec => rec.idMeal !== data.idMeal)
+                setFavorites(filtered)
+                toast.success("Favorite Removed Successfully")
+            }     
+            else{
+                const newList = [...favorites , data]
+                setFavorites(newList)
+                toast.success("Favorite Added Successfully")
+            }  
+    
+        }
+
+
+
   return data?(
     <div className='flex flex-col gap-10'>
      <div>
@@ -47,6 +73,9 @@ const CateRecipeDetail = () => {
      <div className='flex gap-10 flex-col'>
         <div className='relative'>
             <h1 className='text-8xl flex gap-2 items-end text-white/70 font-bold'>{data.strMeal}<p className='text-white/50 text-xl'>({data.strCategory})</p></h1>
+            <div className='absolute right-0 top-0'>
+                {isFavorite() ? <button onClick={favoriteHandler} className='px-7 py-2 hover:bg-orange-600/80 duration-200 transition-all cursor-pointer bg-orange-600 font-semibold text-white rounded-lg'>Remove From Favorites</button> : <button onClick={favoriteHandler} className='px-7 py-2 hover:bg-green-600/80 duration-200 transition-all bg-green-600 font-semibold text-white rounded-lg'>Add To Favorites</button>}
+            </div>
         </div>
                 <p className='text-white/10  font-bold border-b-4 mb-10 text-9xl tracking-widest uppercase text-center'>{data.strArea} Cuisine</p>
         <div className='flex flex-col gap-30'>

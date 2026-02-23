@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 const HomePageCard = ({recipe}) => {
   return (
-   <Link to={`/recipe/${recipe.strCategory}`} >
+   <Link to={`/cate-recipe/${recipe.strCategory}`} >
         <div className='w-70 rounded-xl bg-gray-900 text-white'>
         <img className='w-70 rounded-t-xl h-45 object-cover' src={recipe.strCategoryThumb} alt="" />
         <div className='flex px-3 py-1 pb-5 flex-col  gap-1'>
